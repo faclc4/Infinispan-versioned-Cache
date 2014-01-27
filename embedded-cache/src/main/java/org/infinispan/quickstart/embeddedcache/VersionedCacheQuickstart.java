@@ -22,6 +22,8 @@
  */
 package org.infinispan.quickstart.embeddedcache;
 
+import java.util.LinkedList;
+import java.util.List;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
@@ -59,6 +61,8 @@ public class VersionedCacheQuickstart {
       Cache<Object, Object> cache = manager.getCache(cacheName);
       //VersionedCacheImpl<Object,Object> cache = new VersionedCacheImpl<Object,Object>();
       
+      System.out.println(Boolean.getBoolean("infinispan.clustered"));
+      
       long version = System.currentTimeMillis();
       cache.put("key2", "value2", version);
       
@@ -66,12 +70,12 @@ public class VersionedCacheQuickstart {
       // Add a entry
       cache.put("key", "value");
       // Validate the entry is now in the cache
-      assertEqual(2, cache.size());
-      assertTrue(cache.containsKey("key"));
+      //assertEqual(2, cache.size());
+      //assertTrue(cache.containsKey("key"));
       // Remove the entry from the cache
       Object v = cache.remove("key");
       // Validate the entry is no longer in the cache
-      assertEqual("value", v);
+      //assertEqual("value", v);
       //assertTrue(cache.isEmpty());
 
       // Add an entry with the key "key"
@@ -79,7 +83,7 @@ public class VersionedCacheQuickstart {
       // And replace it if missing
       cache.putIfAbsent("key", "newValue");
       // Validate that the new value was not added
-      assertEqual("value", cache.get("key"));
+      //assertEqual("value", cache.get("key"));
 
       //cache.clear();
       //assertTrue(cache.isEmpty());
@@ -105,6 +109,89 @@ public class VersionedCacheQuickstart {
      
       System.out.println("key: "+ aux3.toString());
       
+      
+      
+      System.out.println("Testing: ... Infinispan puts:");
+      List results = new LinkedList();
+      int k = 0;
+      String value = "teste";
+      for(int i=1; i<10000;i++){
+          long temp1 = System.nanoTime();
+          
+          cache.put(k+i, value+i);
+          
+          long temp2 = System.nanoTime();
+          results.add(temp2-temp1);
+          //System.out.println(temp2-temp1);
+      }
+      System.out.print("Average Infinispan put: ");
+      long average = 0;
+      
+      for (int j = 0; j< results.size(); j++){
+          average = average + Long.parseLong(results.get(j).toString());
+      }
+      double finalresults =(average / 10000); 
+      System.out.println( finalresults * 0.000001 +" ms.");
+      
+      System.out.println(cache.get(9999));
+      
+      
+      cache.clear();
+      
+      System.out.println("Testing: ... Infinispan puts:");
+      results = new LinkedList();
+      k = 0;
+      value = "teste";
+      for(int i=1; i<10000;i++){
+          long temp1 = System.nanoTime();
+          
+          cache.put(k+i, value+i);
+          
+          long temp2 = System.nanoTime();
+          results.add(temp2-temp1);
+          //System.out.println(temp2-temp1);
+      }
+      System.out.print("Average Infinispan put: ");
+      average = 0;
+      
+      for (int j = 0; j< results.size(); j++){
+          average = average + Long.parseLong(results.get(j).toString());
+      }
+      finalresults =(average / 10000); 
+      System.out.println( finalresults * 0.000001 +" ms.");
+      
+      System.out.println(cache.get(9999));
+      
+      
+      cache.clear();
+      
+      System.out.println("Testing: ... Infinispan MVCC puts:");
+      List results2 = new LinkedList();
+      int k2 = 0;
+      
+      for(long i=1; i<10000;i++){
+          long tempx1 = System.nanoTime();
+          
+          //cache.put(k+i, value);
+          cache.put(k2, "teste"+i, i);
+          
+          long tempx2 = System.nanoTime();
+          results2.add(tempx2-tempx1);
+          Thread.sleep(1);
+      }
+      System.out.print("Average Infinispan put: ");
+      long average2 = 0;
+      
+      for (int j = 0; j< results2.size(); j++){
+          average2 = average2 + Long.parseLong(results2.get(j).toString());
+      }
+      double finalresults2 =(average2 / 10000); 
+      System.out.println( finalresults2 * 0.000001 +" ms.");
+      
+      long auxx = 10000;
+      long auxx1= 9900;
+      //System.out.println("Testing results inserted: "+ cache.getUpTo(k2, auxx));
+      System.out.println("Testing results inserted: "+ cache.getRange(k2, auxx1, auxx));
    }
 
 }
