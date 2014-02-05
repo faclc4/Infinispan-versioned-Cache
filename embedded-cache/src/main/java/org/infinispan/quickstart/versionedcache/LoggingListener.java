@@ -1,4 +1,4 @@
-package org.infinispan.quickstart.embeddedcache;
+package org.infinispan.quickstart.versionedcache;
 
 import org.infinispan.notifications.Listener;
 import org.infinispan.notifications.cachelistener.annotation.CacheEntryCreated;

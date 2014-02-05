@@ -20,15 +20,15 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.infinispan.quickstart.embeddedcache;
+package org.infinispan.quickstart.versionedcache;
 
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.infinispan.quickstart.embeddedcache.util.Assert.assertEqual;
-import static org.infinispan.quickstart.embeddedcache.util.Assert.assertFalse;
-import static org.infinispan.quickstart.embeddedcache.util.Assert.assertTrue;
+import static org.infinispan.quickstart.versionedcache.util.Assert.assertEqual;
+import static org.infinispan.quickstart.versionedcache.util.Assert.assertFalse;
+import static org.infinispan.quickstart.versionedcache.util.Assert.assertTrue;
 
 public class DefaultCacheQuickstart {
 

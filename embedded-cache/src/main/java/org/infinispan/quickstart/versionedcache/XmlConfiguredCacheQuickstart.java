@@ -20,15 +20,15 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.infinispan.quickstart.embeddedcache;
+package org.infinispan.quickstart.versionedcache;
 
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
-public class Quickstart {
+public class XmlConfiguredCacheQuickstart {
 
    public static void main(String args[]) throws Exception {
-      Cache<Object, Object> c = new DefaultCacheManager().getCache();
+	   Cache<Object, Object> c = new DefaultCacheManager("infinispan.xml").getCache("xml-configured-cache");
    }
 
 }

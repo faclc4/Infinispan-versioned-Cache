@@ -20,36 +20,15 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.infinispan.quickstart.embeddedcache.util;
+package org.infinispan.quickstart.versionedcache;
 
-public class Assert {
+import org.infinispan.Cache;
+import org.infinispan.manager.DefaultCacheManager;
 
-	private Assert() {
-	}
-	
-	public static void assertTrue(boolean condition) {
-		if (!condition)
-			throw new AssertionError();
-	}
-	
-	public static void assertFalse(boolean condition) {
-		if (condition)
-			throw new AssertionError();
-	}
-	
-	public static void assertEqual(int expected, int actual) {
-		if (expected != actual)
-			throw new AssertionError("Expected " + expected + " but was " + actual);
-	}
-	
-	public static void assertEqual(Object expected, Object actual) {
-		if (expected == null && actual == null)
-			return;
-		else if (expected == null && actual != null)
-			throw new AssertionError("Expected null but was " + actual);
-		else if (!expected.equals(actual))
-			throw new AssertionError("Expected " + expected + " but was " + actual);
-	}
-	
+public class Quickstart {
+
+   public static void main(String args[]) throws Exception {
+      Cache<Object, Object> c = new DefaultCacheManager().getCache();
+   }
+
 }
-

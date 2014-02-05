@@ -1,4 +1,4 @@
-package org.infinispan.quickstart.embeddedcache;
+package org.infinispan.quickstart.versionedcache;
 
 import org.infinispan.Cache;
 import org.infinispan.manager.EmbeddedCacheManager;

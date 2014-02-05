@@ -1,4 +1,4 @@
-package org.infinispan.quickstart.embeddedcache;
+package org.infinispan.quickstart.versionedcache;
 
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
@@ -37,12 +37,7 @@ public abstract class AbstractNode {
    
    public AbstractNode() {
       this.cacheManager = createCacheManagerProgramatically();
-      // Uncomment to create cache from XML
-      // try {
-      //    this.cacheManager = createCacheManagerFromXml();
-      // } catch (IOException e) {
-      //    throw new RuntimeException(e);
-      // }
+
    }
    
    protected EmbeddedCacheManager getCacheManager() {
